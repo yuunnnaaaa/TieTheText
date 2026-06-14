@@ -3,8 +3,9 @@ from skema import CustomerChat, OrderHandoverResponse
 from ai_service import extract_order_from_chat
 from urllib.parse import quote as urlquote
 
+# Inisialisasi aplikasi FastAPI
 app = FastAPI(
-    title="FloraBot MVP - Smart Order Handover",
+    title="TieTheText MVP - Smart Order Handover",
     description="Backend AI untuk otomatisasi ekstraksi pesanan UMKM Florist - IDCamp 2026",
     version="1.0.0"
 )
@@ -14,7 +15,7 @@ OWNER_PHONE = "6287738726533"
 
 @app.get("/")
 def read_root():
-    return {"status": "success", "message": "Backend FloraBot MVP Aktif!"}
+    return {"status": "success", "message": "Backend tiethetext MVP Aktif!"}
 
 @app.post("/api/v1/extract-order", response_model=OrderHandoverResponse)
 def extract_order(payload: CustomerChat):
