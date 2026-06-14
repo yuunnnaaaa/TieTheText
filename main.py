@@ -2,6 +2,7 @@ from fastapi import FastAPI, HTTPException
 from skema import CustomerChat, OrderHandoverResponse
 from ai_service import extract_order_from_chat
 from urllib.parse import quote as urlquote
+from fastapi.middleware.cors import CORSMiddleware
 
 # Inisialisasi aplikasi FastAPI
 app = FastAPI(
@@ -9,10 +10,6 @@ app = FastAPI(
     description="Backend AI untuk otomatisasi ekstraksi pesanan UMKM Florist - IDCamp 2026",
     version="1.0.0"
 )
-
-from fastapi.middleware.cors import CORSMiddleware
-
-app = FastAPI()
 
 app.add_middleware(
     CORSMiddleware,
