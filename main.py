@@ -10,6 +10,18 @@ app = FastAPI(
     version="1.0.0"
 )
 
+from fastapi.middleware.cors import CORSMiddleware
+
+app = FastAPI()
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # Mengizinkan semua domain (termasuk Streamlit Cloud)
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
 # Nomor WhatsApp Pemilik Toko (Ganti dengan nomor tujuan UMKM, gunakan kode negara tanpa '+')
 OWNER_PHONE = "6287738726533" 
 
