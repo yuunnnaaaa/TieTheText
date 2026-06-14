@@ -1,6 +1,14 @@
 import streamlit as st
 import requests
 
+# --- PENGATURAN URL BACKEND DINAMIS ---
+# Mengambil URL backend dari Secrets Streamlit Cloud agar bisa terhubung ke Hugging Face
+if "BACKEND_URL" in st.secrets:
+    BASE_BACKEND_URL = st.secrets["BACKEND_URL"]
+else:
+    # Fallback otomatis ke alamat lokal jika kamu sedang menjalankan di laptop sendiri
+    BASE_BACKEND_URL = "http://127.0.0.1:8000"
+
 # Konfigurasi halaman web
 st.set_page_config(page_title="FloraBot Dashboard", page_icon="💐", layout="centered")
 
@@ -106,8 +114,8 @@ if st.button("✨ Proses Pesanan dengan AI", type="primary"):
     else:
         with st.spinner("🌸 FloraBot sedang merangkai data pesananmu..."):
             try:
-                # Backend URL
-                backend_url = "http://127.0.0.1:8000/api/v1/extract-order"
+                # Backend URL sekarang menggabungkan domain dari Secrets dengan rute API FastAPI
+                backend_url = f"{BASE_BACKEND_URL}/api/v1/extract-order"
                 
                 response = requests.post(backend_url, json={"chat_text": chat_input})
                 
